@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:alibaba/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

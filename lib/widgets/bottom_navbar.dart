@@ -1,5 +1,4 @@
 
-import 'dart:ffi';
 
 import 'package:alibaba/pages/home_page.dart';
 import 'package:alibaba/pages/search_page.dart';
@@ -12,7 +11,6 @@ class bottomNavbar extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    double tabWidth = MediaQuery.of(context).size.width / 3;
     return DefaultTabController(
       length: 3,
       child: Scaffold(

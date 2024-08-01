@@ -1,4 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../apis/api_related.dart';
@@ -16,7 +17,7 @@ class _InfoPage extends State<InfoPage> {
   ApiService apiServices = ApiService();
 
   late Future<Info> movieDetail;
-  //late Future<MovieRecommendationsModel> movieRecommendationModel;
+  // late Future<MovieRecommendationsModel> movieRecommendationModel;
 
   @override
   void initState() {
@@ -26,8 +27,6 @@ class _InfoPage extends State<InfoPage> {
 
   fetchInitialData() {
     movieDetail = apiServices.getInfo(widget.movieId);
-    // movieRecommendationModel =
-    //     apiServices.getMovieRecommendations(widget.movieId);
     setState(() {});
   }
 
@@ -36,13 +35,16 @@ class _InfoPage extends State<InfoPage> {
     var size = MediaQuery.of(context).size;
     print(widget.movieId);
     return Scaffold(
+      /*appBar: AppBar(
+        title: Text("Info"),
+      )*/
       body: SingleChildScrollView(
-        child: FutureBuilder(
+        child: FutureBuilder<Info>(
           future: movieDetail,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final movie = snapshot.data;
-
+              log("movie has data");
               String genresText =
               movie!.genres.map((genre) => genre.name).join(', ');
 
@@ -76,8 +78,7 @@ class _InfoPage extends State<InfoPage> {
                     ],
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.only(top: 25, left: 10, right: 10),
+                    padding: const EdgeInsets.only(top: 25, left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -90,6 +91,7 @@ class _InfoPage extends State<InfoPage> {
                         ),
                         const SizedBox(height: 15),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               movie.releaseDate.year.toString(),
@@ -97,21 +99,21 @@ class _InfoPage extends State<InfoPage> {
                                 color: Colors.grey,
                               ),
                             ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Text(
-                              genresText,
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 17,
+                            const SizedBox(width: 30),
+                            Expanded(
+                              child: Text(
+                                genresText,
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 17,
+                                ),
+                                overflow: TextOverflow.visible, // Allows text to wrap
+                                softWrap: true, // Allows the text to break into multiple lines
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30),
                         Text(
                           movie.overview,
                           maxLines: 6,
@@ -122,14 +124,16 @@ class _InfoPage extends State<InfoPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-
+                  const SizedBox(height: 30),
                 ],
               );
+            } else if (snapshot.hasError) {
+              log("Error: ${snapshot.error}");
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              log("No data");
+              return Center(child: Text('No data available'));
             }
-            return const SizedBox();
           },
         ),
       ),
