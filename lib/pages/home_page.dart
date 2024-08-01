@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           height: 120,
         ),
         actions: [
-          Padding(
+          /*Padding(
             padding: const EdgeInsets.only(left: 25, right: 20),
             child: InkWell(
               onTap: () {},
@@ -51,13 +51,14 @@ class _HomePageState extends State<HomePage> {
                 size: 30,
               ),
             ),
-          ),
+          ),*/
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: Container(
               height: 27,
               width: 27,
-              color: Colors.blue,
+              color: Colors.blueAccent,
+              child: Icon(Icons.person,color: Colors.black,size: 20,),
             ),
           ),
           const SizedBox(
