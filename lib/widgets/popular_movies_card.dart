@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:alibaba/models/mov_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../apis/api_related.dart';
 import '../data/datafunc.dart';
@@ -64,33 +65,25 @@ class _PopMoviesCardState extends State<PopMoviesCard> {
                           child: ClipRRect(
                             borderRadius: const BorderRadius.all(
                                 Radius.circular(15)),
-                            child: Image.network(
-                              "$imageUrl${movie.posterPath}",
+                            child: CachedNetworkImage(
+                              imageUrl: "$imageUrl${movie.posterPath ?? ""}",
                               fit: BoxFit.fill,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return Container(
-                                    width: 200,
-                                    color: Colors.white10,
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress
-                                            .expectedTotalBytes != null
-                                            ? loadingProgress
-                                            .cumulativeBytesLoaded /
-                                            (loadingProgress
-                                                .expectedTotalBytes ?? 1)
-                                            : null,
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
+                              placeholder: (context, url) => Container(
+                                width: 200,
+                                color: Colors.white10,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                width: 200,
+                                color: Colors.white10,
+                                child: const Center(
+                                  child: Icon(Icons.error),
+                                ),
+                              ),
                             ),
+
                           ),
                         ),
                         Positioned(

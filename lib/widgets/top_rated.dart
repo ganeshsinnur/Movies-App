@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../apis/api_related.dart';
@@ -61,7 +62,25 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                           ),
                           child: ClipRRect(
                             borderRadius: const BorderRadius.all(Radius.circular(15)),
-                            child: Image.network(
+                            child: CachedNetworkImage(
+                              imageUrl: "$imageUrl${movie.posterPath ?? ""}",
+                              fit: BoxFit.fill,
+                              placeholder: (context, url) => Container(
+                                width: 200,
+                                color: Colors.white10,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                width: 200,
+                                color: Colors.white10,
+                                child: const Center(
+                                  child: Icon(Icons.error),
+                                ),
+                              ),
+                            ),
+                            /*Image.network(
                               "$imageUrl${movie.posterPath}",
                               fit: BoxFit.fill,
                               loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
@@ -81,7 +100,7 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                                   );
                                 }
                               },
-                            ),
+                            ),*/
                           ),
                         ),
                         Positioned(
