@@ -79,6 +79,7 @@ class _NowPlayingCardState extends State<NowPlayingCard> {
                                     color: Colors.white10,
                                     child: Center(
                                       child: CircularProgressIndicator(
+                                        color: Colors.white12,
                                         value: loadingProgress
                                             .expectedTotalBytes != null
                                             ? loadingProgress

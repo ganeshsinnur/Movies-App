@@ -37,7 +37,7 @@ class bottomNavbar extends StatelessWidget{
           children: [
             HomePage(),
             SearchScreen(),
-            wishlistPage()
+            WishlistPage()
           ],
         ),
         

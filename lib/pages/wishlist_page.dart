@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -86,11 +87,13 @@ class _wishlistPageState extends State<wishlistPage> {
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
 
-                              child: const Icon(Icons.cancel,color: Colors.red,) ,/*Text(
+                              child: const Icon(Icons.cancel,color: Colors.red,) ,*/
+/*Text(
                                 'Remove',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-                              )*/
+                              )*//*
+
                             ),
                           ),
                         ),
@@ -108,3 +111,136 @@ class _wishlistPageState extends State<wishlistPage> {
 }
 
 
+*/
+
+
+import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../apis/api_related.dart';
+import '../data/datafunc.dart';
+import '../data/datas.dart';
+import '../data/storage.dart';
+import '../models/mov_model.dart';
+
+class WishlistPage extends StatefulWidget {
+  const WishlistPage({super.key});
+
+  @override
+  _WishlistPageState createState() => _WishlistPageState();
+}
+
+class _WishlistPageState extends State<WishlistPage> {
+  late List<WishlistMovies> watchList = [];
+  final WatchlistStorage _storage = WatchlistStorage();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWatchlist();
+  }
+
+  Future<void> _loadWatchlist() async {
+    final List<WishlistMovies> loadedWatchlist = await _storage.loadWatchlist();
+    setState(() {
+      watchList = loadedWatchlist;
+    });
+  }
+
+  void _removeFromWishlist(WishlistMovies movie) {
+    setState(() {
+      watchList.remove(movie);
+      _storage.saveWatchlist(watchList);
+      watchList.removeWhere((item) => item.id == movie.id);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: 120,
+        ),
+      ),
+      backgroundColor: Colors.black,
+      body: ListView.builder(
+        padding: const EdgeInsets.all(10),
+        itemCount: watchList.length,
+        itemBuilder: (context, index) {
+          var movie = watchList[index];
+          return Card(
+            color: Colors.grey[900],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: "$imageUrl${movie.posterPath}",
+                    height: 150,
+                    width: 100,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 15),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          movie.originalTitle,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Release Year: ${movie.releaseDate.year}',
+                          style: const TextStyle(
+                              color: Colors.grey, fontSize: 14),
+                        ),
+                        const SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {
+                              _removeFromWishlist(movie);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              child: const Icon(
+                                Icons.cancel,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

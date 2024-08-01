@@ -1,3 +1,4 @@
+/*
 import 'dart:developer';
 import '../models/mov_model.dart';
 import '../models/result_class.dart';
@@ -37,4 +38,36 @@ class DataUtills{
     log("${items.any((item) => item.id == id)}");
     return items.any((item) => item.id == id);
   }
+}*/
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import '../data/datas.dart';
+import '../models/mov_model.dart';
+
+class DataUtills {
+  static const String _keyWatchlist = 'watchlist';
+
+  static bool containId(List<WishlistMovies> watchList, int id) {
+    return watchList.any((movie) => movie.id == id);
+  }
+
+  static void addMovieToWatchList(WishlistMovies movie) async {
+    watchList.add(movie);
+    await _saveWatchlist();
+  }
+
+  static void removeMovieFromWatchList(int id) async {
+    watchList.removeWhere((movie) => movie.id == id);
+    await _saveWatchlist();
+  }
+
+  static Future<void> _saveWatchlist() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String encodedData = jsonEncode(
+      watchList.map((movie) => movie.toJson()).toList(),
+    );
+    await prefs.setString(_keyWatchlist, encodedData);
+  }
 }
+
