@@ -12,11 +12,9 @@ A Flutter application for searching movies and adding them to a wishlist. The ap
 
 ## Screenshots
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="screenshots/homePage.jpeg" alt="Home Page" style="flex: 1; min-width: 200px; max-width: 45%; height: auto;">
-  <img src="screenshots/infoPage.jpeg" alt="Info Page" style="flex: 1; min-width: 200px; max-width: 45%; height: auto;">
-  <img src="screenshots/searchPage.jpeg" alt="Search Page" style="flex: 1; min-width: 200px; max-width: 45%; height: auto;">
-  <img src="screenshots/wishlistPage.jpeg" alt="Wishlist Page" style="flex: 1; min-width: 200px; max-width: 45%; height: auto;">
-</div>
+<img alt="homePage.jpeg" height="684" src="screenshots%2FhomePage.jpeg" />
+<img alt="homePage.jpeg" height="684" src="screenshots%2FinfoPage%27.jpeg" />
+<img alt="homePage.jpeg" height="684" src="screenshots%2FsearchPage.jpeg" />
+<img alt="homePage.jpeg" height="684" src="screenshots%2FwishlistPage.jpeg" />
 
 
