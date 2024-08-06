@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/search_model.dart';
 
-const apiKey="bbd76d51ca2aee4bbf34e48c99bad86b";
+const apiKey="add your api key";
 const imageUrl="https://image.tmdb.org/t/p/original";
 const baseUrl="https://api.themoviedb.org/3/";
 var key = "?api_key=$apiKey";
@@ -61,7 +61,7 @@ class ApiService{
     final url="$baseUrl$endPoint";
      log("search url is $url");
 
-    final response=await http.get(Uri.parse(url),headers: {'Authorization':"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYmQ3NmQ1MWNhMmFlZTRiYmYzNGU0OGM5OWJhZDg2YiIsIm5iZiI6MTcyMjE2Nzg1OS4yOTA1MjUsInN1YiI6IjY2YTUwODRhYTgwMjNhNjUyMTllYzU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.65zvD6XGblbWVqukkzjNu2viV5vRK60tKy26Rxybmus"});
+    final response=await http.get(Uri.parse(url),headers: {'Authorization':"add your header here"});
 
     if(response.statusCode==200){
       log("Search success");
