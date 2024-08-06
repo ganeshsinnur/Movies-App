@@ -12,7 +12,7 @@ A Flutter application for searching movies and adding them to a wishlist. The ap
 
 ## Screenshots
 
-![homePage.jpeg](screenshots%2FhomePage.jpeg)
-![infoPage'.jpeg](screenshots%2FinfoPage%27.jpeg)
-![searchPage.jpeg](screenshots%2FsearchPage.jpeg)
-![wishlistPage.jpeg](screenshots%2FwishlistPage.jpeg)
+![homePage.jpeg](screenshots%2FhomePage.jpeg)![infoPage'.jpeg](screenshots%2FinfoPage%27.jpeg)
+![searchPage.jpeg](screenshots%2FsearchPage.jpeg)![wishlistPage.jpeg](screenshots%2FwishlistPage.jpeg)
+
+
