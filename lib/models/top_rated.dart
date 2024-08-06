@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-// import 'package:alibaba/models/result_class.dart';
-
 class TopRated {
   int page;
   List<Result> results;

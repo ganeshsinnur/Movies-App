@@ -1,9 +1,17 @@
-
 import 'package:alibaba/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
-void main() {
+import 'models/hive/wishlist_model.dart';
+
+void main() async  {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  Hive.registerAdapter(WishMoviesAdapter());
+  await Hive.openBox<WishMovies>('wishlistBox');
   runApp(const MyApp());
 }
 
@@ -32,7 +40,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
             .copyWith(background: Colors.black),
       ),
-      home:  SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }

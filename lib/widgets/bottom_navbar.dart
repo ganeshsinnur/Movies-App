@@ -1,5 +1,3 @@
-
-
 import 'package:alibaba/pages/home_page.dart';
 import 'package:alibaba/pages/search_page.dart';
 import 'package:alibaba/pages/wishlist_page.dart';
@@ -8,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class bottomNavbar extends StatelessWidget{
+  const bottomNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +25,14 @@ class bottomNavbar extends StatelessWidget{
               text: "Wishlist",)
           ],
           //indicatorColor: Colors.transparent,
-            indicatorColor: Colors.white,
+            indicatorColor: Colors.white70,
             indicatorSize: TabBarIndicatorSize.tab,
             labelColor: Colors.white,
             dividerColor: Colors.transparent,
 
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             HomePage(),
             SearchScreen(),

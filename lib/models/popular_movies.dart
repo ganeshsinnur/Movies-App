@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 class Popular {
   int page;
   List<Result> results;
@@ -152,11 +151,15 @@ class Result {
 }
 
 enum OriginalLanguage {
-  EN
+  EN,
+  ES,
+  ZH
 }
 
 final originalLanguageValues = EnumValues({
-  "en": OriginalLanguage.EN
+  "en": OriginalLanguage.EN,
+  "es": OriginalLanguage.ES,
+  "zh": OriginalLanguage.ZH
 });
 
 class EnumValues<T> {

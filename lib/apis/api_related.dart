@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:alibaba/models/info_model.dart';
 import 'package:alibaba/models/top_rated.dart';
 
 import '../models/now_playing.dart';
@@ -72,19 +71,5 @@ class ApiService{
     throw Exception("Failed to load the content");
   }
 
-  Future<Info> getInfo(int id) async{
-    endPoint="movie/$id";
-    final url="$baseUrl$endPoint";
-    // log("search url is $url");
 
-    final response=await http.get(Uri.parse(url),headers: {'Authorization':"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYmQ3NmQ1MWNhMmFlZTRiYmYzNGU0OGM5OWJhZDg2YiIsIm5iZiI6MTcyMjE2Nzg1OS4yOTA1MjUsInN1YiI6IjY2YTUwODRhYTgwMjNhNjUyMTllYzU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.65zvD6XGblbWVqukkzjNu2viV5vRK60tKy26Rxybmus"});
-
-    if(response.statusCode==200){
-      log("fetched Info Search success");
-      log(response.body);
-      // log("${(response.body)}");
-      return Info.fromJson(jsonDecode(response.body));
-    }
-    throw Exception("Failed to load the content");
-  }
 }
