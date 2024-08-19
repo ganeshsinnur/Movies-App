@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import '../apis/api_related.dart';
 import '../models/hive/wishlist_model.dart';
 import '../models/search_model.dart';
+import 'info_final_page.dart';
 import 'info_page.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -91,19 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => InfoPage(
-                              movie: WishMovies(
-                                backdropPath: movie.backdropPath ?? "",
-                                genreIds: movie.genreIds,
-                                id: movie.id,
-                                originalLanguage: movie.originalLanguage,
-                                originalTitle: movie.originalTitle,
-                                overview: movie.overview,
-                                posterPath: movie.posterPath ?? "",
-                                releaseDate: DateTime.parse(movie.releaseDate),
-                                title: movie.title,
-                              ),
-                            ),
+                            builder: (context) => DetailedInfoPage(movieId: movie.id,),
                           ),
                         );
                       },
@@ -143,7 +132,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      movie.originalTitle,
+                                      movie.title,
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
@@ -153,6 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       maxLines: 2,
                                     ),
                                     const SizedBox(height: 8),
+                                    if (movie.releaseDate != null && movie.releaseDate.length >= 4)
                                     Text(
                                       'Release Year: ${movie.releaseDate.substring(0, 4)}',
                                       style: const TextStyle(

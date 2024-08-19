@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:alibaba/pages/info_final_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -70,19 +71,7 @@ class _PopMoviesCardState extends State<PopMoviesCard> {
                         Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) => InfoPage(
-                              movie: WishMovies(
-                                backdropPath: movie.backdropPath,
-                                genreIds: movie.genreIds,
-                                id: movie.id,
-                                originalLanguage: movie.originalLanguage.toString(),
-                                originalTitle: movie.originalTitle,
-                                overview: movie.overview,
-                                posterPath: movie.posterPath,
-                                releaseDate: movie.releaseDate,
-                                title: movie.title,
-                              ),
-                            ),
+                            pageBuilder: (context, animation, secondaryAnimation) => DetailedInfoPage(movieId: movie.id),
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                               const begin = Offset(1.0, 0.0);
                               const end = Offset.zero;
@@ -114,14 +103,14 @@ class _PopMoviesCardState extends State<PopMoviesCard> {
                                 imageUrl: "$imageUrl${movie.posterPath}",
                                 fit: BoxFit.fill,
                                 placeholder: (context, url) => Container(
-                                  width: 200,
+                                  width: 215,
                                   color: Colors.white10,
                                   child: const Center(
                                     child: CircularProgressIndicator(color: Colors.transparent,),
                                   ),
                                 ),
                                 errorWidget: (context, url, error) => Container(
-                                  width: 200,
+                                  width: 215,
                                   color: Colors.white10,
                                   child: const Center(
                                     child: Icon(Icons.error),

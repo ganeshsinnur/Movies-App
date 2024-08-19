@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:sealed_languages/sealed_languages.dart';
+
 class NowPlaying {
   Dates dates;
   int page;
@@ -159,7 +161,7 @@ class Result {
     backdropPath: json["backdrop_path"],
     genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
     id: json["id"],
-    originalLanguage: json["original_language"],
+    originalLanguage: NaturalLanguage.fromCodeShort(json["original_language"]).name,
     originalTitle: json["original_title"],
     overview: json["overview"],
     popularity: json["popularity"]?.toDouble(),

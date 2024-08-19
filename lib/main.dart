@@ -1,5 +1,6 @@
 import 'package:alibaba/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -12,7 +13,9 @@ void main() async  {
   Hive.init(appDocumentDirectory.path);
   Hive.registerAdapter(WishMoviesAdapter());
   await Hive.openBox<WishMovies>('wishlistBox');
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) =>runApp(const MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {

@@ -1,4 +1,9 @@
 
+import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
+
+import '../models/hive/wishlist_model.dart';
+
 const Map<int, String> genreMap = {
   28: 'Action',
   12: 'Adventure',
@@ -24,4 +29,13 @@ const Map<int, String> genreMap = {
 
 List<String> getGenreNames(List<int> genreIds) {
   return genreIds.map((id) => genreMap[id] ?? 'Unknown').toList();
+}
+
+bool isInWishlist(int id, Box<WishMovies> box) {
+  return box.containsKey(id);
+}
+String getTime(int time) {
+  int hr = time ~/ 60;
+  int min = time % 60;
+  return"${hr}hr ${min}min";
 }

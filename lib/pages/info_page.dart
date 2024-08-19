@@ -15,23 +15,35 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPage extends State<InfoPage> {
   late Box<WishMovies> _wishlistBox;
+  //Color? backgroundColor;
 
   @override
   void initState() {
     super.initState();
     _wishlistBox = Hive.box<WishMovies>('wishlistBox');
+    //_updatePalette();
   }
 
   bool _isInWishlist(int id) {
     return _wishlistBox.containsKey(id);
   }
 
+/*  Future<void> _updatePalette() async {
+    final PaletteGenerator paletteGenerator =
+    await PaletteGenerator.fromImageProvider(
+      NetworkImage("$imageUrl${widget.movie.backdropPath}"),
+    );
+
+    setState(() {
+      backgroundColor = paletteGenerator.dominantColor?.color ?? Colors.white;
+    });
+  }*/
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Scaffold(
+      //backgroundColor: backgroundColor,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -124,6 +136,8 @@ class _InfoPage extends State<InfoPage> {
                         style: const TextStyle(
                             color: Colors.white70, fontSize: 16),
                       ),
+                      const SizedBox(height: 20,),
+                      Text("Cast", style:TextStyle(color: Colors.white))
                     ],
                   ),
                 ),
@@ -136,7 +150,7 @@ class _InfoPage extends State<InfoPage> {
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top:5),
-              color: Colors.black.withOpacity(0.5),
+              //color: Colors.black.withOpacity(0.5),
               // Optional: Add a semi-transparent background
               child: ElevatedButton(
                 onPressed: () {
@@ -181,6 +195,7 @@ class _InfoPage extends State<InfoPage> {
               ),
             ),
           ),
+
         ],
       ),
     );

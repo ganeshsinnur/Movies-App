@@ -1,14 +1,15 @@
+import 'dart:developer';
+
 import 'package:alibaba/apis/api_related.dart';
 import 'package:alibaba/models/top_rated.dart';
 import 'package:alibaba/widgets/popular_movies_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
 import '../models/now_playing.dart';
 import '../models/popular_movies.dart';
 import '../widgets/now_playing_card.dart';
 import '../widgets/top_rated.dart';
+import 'info_final_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -70,7 +71,8 @@ class _HomePageState extends State<HomePage> {
               builder: (context, snapshot) {
                 return Column(
                   children: [
-                    /*Top Movies*/SizedBox(
+                    /*Top Movies*/
+                    SizedBox(
                       height: 400,
                       child: TopMoviesCard(
                         future: topRated,
@@ -80,7 +82,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    /*Popular Movies*/SizedBox(
+                    /*Popular Movies*/
+                    SizedBox(
                       height: 400,
                       child: PopMoviesCard(
                         future: popularMovies,
@@ -90,7 +93,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    /*NowPlaying*/ SizedBox(
+                    /*NowPlaying*/
+                    SizedBox(
                       height: 400,
                       child: NowPlayingCard(
                         future: nowPlaying,

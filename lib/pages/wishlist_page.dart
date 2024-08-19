@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../apis/api_related.dart';
 import '../models/hive/wishlist_model.dart';
+import 'info_final_page.dart';
 import 'info_page.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -74,19 +75,7 @@ class _WishlistPageState extends State<WishlistPage> {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => InfoPage(
-                        movie: WishMovies(
-                          backdropPath: movie.backdropPath,
-                          genreIds: movie.genreIds,
-                          id: movie.id,
-                          originalLanguage: movie.originalLanguage,
-                          originalTitle: movie.originalTitle,
-                          overview: movie.overview,
-                          posterPath: movie.posterPath,
-                          releaseDate: movie.releaseDate,
-                          title: movie.title,
-                        ),
-                      ),
+                      pageBuilder: (context, animation, secondaryAnimation) => DetailedInfoPage(movieId: movie.id,),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         const begin = Offset(1.0, 0.0); // Start from the right
                         const end = Offset.zero; // End at the current position

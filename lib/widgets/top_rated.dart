@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import '../apis/api_related.dart';
 import '../models/hive/wishlist_model.dart';
 import '../models/top_rated.dart';
+import '../pages/info_final_page.dart';
 
 class TopMoviesCard extends StatefulWidget {
   final Future<TopRated> future;
@@ -68,19 +69,8 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                         Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) => InfoPage(
-                              movie: WishMovies(
-                                backdropPath: movie.backdropPath,
-                                genreIds: movie.genreIds,
-                                id: movie.id,
-                                originalLanguage: movie.originalLanguage,
-                                originalTitle: movie.originalTitle,
-                                overview: movie.overview,
-                                posterPath: movie.posterPath,
-                                releaseDate: movie.releaseDate,
-                                title: movie.title,
-                              ),
-                            ),
+                            pageBuilder: (context, animation, secondaryAnimation) =>
+                            DetailedInfoPage(movieId: movie.id,)  ,
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                               const begin = Offset(1.0, 0.0); // Start from the right
                               const end = Offset.zero; // End at the current position
@@ -111,14 +101,14 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                                 imageUrl: "$imageUrl${movie.posterPath}",
                                 fit: BoxFit.fill,
                                 placeholder: (context, url) => Container(
-                                  width: 200,
+                                  width: 215,
                                   color: Colors.white10,
                                   child: const Center(
                                     child: CircularProgressIndicator(color: Colors.transparent,),
                                   ),
                                 ),
                                 errorWidget: (context, url, error) => Container(
-                                  width: 200,
+                                  width: 215,
                                   color: Colors.white10,
                                   child: const Center(
                                     child: Icon(Icons.error),
@@ -140,7 +130,6 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  /*watchList.isEmpty || !(DataUtills.containId(watchList, movie.id))*/
                                   if (!_isInWishlist(movie.id)) {
                                     // Add movie to wishlist box
                                     _wishlistBox.put(movie.id, WishMovies(
@@ -155,8 +144,6 @@ class _TopMoviesCardState extends State<TopMoviesCard> {
                                       title: movie.title,
                                     ));
                                   } else if (_isInWishlist(movie.id)) {
-                                    /*// Remove movie from wishlist
-                                    DataUtills.removeMovieFromWatchList(movie.id);*/
                                     _wishlistBox.delete(movie.id);
                                   }
                                 });

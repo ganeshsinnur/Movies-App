@@ -2,52 +2,46 @@ import 'dart:convert';
 
 import 'package:sealed_languages/sealed_languages.dart';
 
-class Search {
-  int page;
-  List<Result> results;
-  int totalPages;
-  int totalResults;
+class PersonMovie {
+  List<Cast> cast;
+  List<dynamic> crew;
+  int id;
 
-  Search({
-    required this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+  PersonMovie({
+    required this.cast,
+    required this.crew,
+    required this.id,
   });
 
-  Search copyWith({
-    int? page,
-    List<Result>? results,
-    int? totalPages,
-    int? totalResults,
+  PersonMovie copyWith({
+    List<Cast>? cast,
+    List<dynamic>? crew,
+    int? id,
   }) =>
-      Search(
-        page: page ?? this.page,
-        results: results ?? this.results,
-        totalPages: totalPages ?? this.totalPages,
-        totalResults: totalResults ?? this.totalResults,
+      PersonMovie(
+        cast: cast ?? this.cast,
+        crew: crew ?? this.crew,
+        id: id ?? this.id,
       );
 
-  factory Search.fromRawJson(String str) => Search.fromJson(json.decode(str));
+  factory PersonMovie.fromRawJson(String str) => PersonMovie.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Search.fromJson(Map<String, dynamic> json) => Search(
-    page: json["page"],
-    results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
-    totalPages: json["total_pages"],
-    totalResults: json["total_results"],
+  factory PersonMovie.fromJson(Map<String, dynamic> json) => PersonMovie(
+    cast: List<Cast>.from(json["cast"].map((x) => Cast.fromJson(x))),
+    crew: List<dynamic>.from(json["crew"].map((x) => x)),
+    id: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
-    "page": page,
-    "results": List<dynamic>.from(results.map((x) => x.toJson())),
-    "total_pages": totalPages,
-    "total_results": totalResults,
+    "cast": List<dynamic>.from(cast.map((x) => x.toJson())),
+    "crew": List<dynamic>.from(crew.map((x) => x)),
+    "id": id,
   };
 }
 
-class Result {
+class Cast {
   bool adult;
   String? backdropPath;
   List<int> genreIds;
@@ -62,8 +56,11 @@ class Result {
   bool video;
   double voteAverage;
   int voteCount;
+  String character;
+  String creditId;
+  int order;
 
-  Result({
+  Cast({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -78,9 +75,12 @@ class Result {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    required this.character,
+    required this.creditId,
+    required this.order,
   });
 
-  Result copyWith({
+  Cast copyWith({
     bool? adult,
     String? backdropPath,
     List<int>? genreIds,
@@ -95,8 +95,11 @@ class Result {
     bool? video,
     double? voteAverage,
     int? voteCount,
+    String? character,
+    String? creditId,
+    int? order,
   }) =>
-      Result(
+      Cast(
         adult: adult ?? this.adult,
         backdropPath: backdropPath ?? this.backdropPath,
         genreIds: genreIds ?? this.genreIds,
@@ -111,13 +114,16 @@ class Result {
         video: video ?? this.video,
         voteAverage: voteAverage ?? this.voteAverage,
         voteCount: voteCount ?? this.voteCount,
+        character: character ?? this.character,
+        creditId: creditId ?? this.creditId,
+        order: order ?? this.order,
       );
 
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
+  factory Cast.fromRawJson(String str) => Cast.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Cast.fromJson(Map<String, dynamic> json) => Cast(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],
     genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
@@ -132,6 +138,9 @@ class Result {
     video: json["video"],
     voteAverage: json["vote_average"]?.toDouble(),
     voteCount: json["vote_count"],
+    character: json["character"],
+    creditId: json["credit_id"],
+    order: json["order"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -149,5 +158,20 @@ class Result {
     "video": video,
     "vote_average": voteAverage,
     "vote_count": voteCount,
+    "character": character,
+    "credit_id": creditId,
+    "order": order,
   };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
