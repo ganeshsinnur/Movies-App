@@ -1,0 +1,4 @@
+//TODO
+1. Add character name in cast (movie page).
+2. change the name, logo, in animation.
+3. change UI in search page.

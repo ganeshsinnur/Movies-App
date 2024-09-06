@@ -213,13 +213,13 @@ class _DetailedInfoPage extends State<DetailedInfoPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              if(movie.originalTitle!=movie.title)
+                              /*if(movie.originalTitle!=movie.title)
                                 Text(
                                   "(${movie.originalTitle})",
                                   style: const TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold,
-                                  ),),
+                                  ),),*/
                               const SizedBox(height: 15),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: mq.width * 0.133),

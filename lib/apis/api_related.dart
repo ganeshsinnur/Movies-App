@@ -76,7 +76,7 @@ class ApiService {
 
     if (response.statusCode == 200) {
       log("Search success");
-      log((response.body));
+     // log((response.body));
       return Search.fromJson(jsonDecode(response.body));
     }
     throw Exception("Failed to load the content");
@@ -86,9 +86,9 @@ class ApiService {
   Future<Info> getInfo(int movieId) async {
     endPoint = "movie/$movieId";
     final url = "$baseUrl$endPoint";
-    log("url=>$url");
+    //log("url=>$url");
     final response = await http.get(Uri.parse(url), headers: header);
-    log(response.statusCode.toString());
+    //log(response.statusCode.toString());
     if (response.statusCode == 200) {
       log("info fetched");
       return Info.fromJson(jsonDecode(response.body));
@@ -102,7 +102,7 @@ class ApiService {
     final url = "$baseUrl$endPoint";
     log(url);
     final response = await http.get(Uri.parse(url), headers: header);
-    log(response.statusCode.toString());
+    //log(response.statusCode.toString());
     if (response.statusCode == 200) {
       log("cast fetched");
       return movieCast.Cast.fromJson(jsonDecode(response.body));

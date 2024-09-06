@@ -34,7 +34,7 @@ class _CastCardState extends State<CastCard> {
           return const Center(child: SizedBox());
         } else {
           var data = snapshot.data!.cast;
-          log("Cast data: ${data.map((e) => e.toJson()).toList()}");
+         // log("Cast data: ${data.map((e) => e.toJson()).toList()}");
           return SizedBox(
             height: 185, // Set the height you want for the list
             child: ListView.builder(

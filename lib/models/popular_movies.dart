@@ -121,7 +121,7 @@ class Result {
     backdropPath: json["backdrop_path"],
     genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
     id: json["id"],
-    originalLanguage: NaturalLanguage.fromCodeShort(json["original_language"]).name,
+    originalLanguage: NaturalLanguage.maybeFromCodeShort(json["original_language"])?.name??json["original_language"],
     originalTitle: json["original_title"],
     overview: json["overview"],
     popularity: json["popularity"]?.toDouble(),
